@@ -35,8 +35,8 @@ export default function Navbar({ onOpenResume }) {
           
           {/* Cars24-style Crisp Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-[#ff5a00] to-[#ff7a00] flex items-center justify-center font-mono font-black text-xl text-white shadow-md shadow-orange-500/30 group-hover:scale-105 transition-transform duration-200">
-              VB
+            <div className="relative w-11 h-11 rounded-2xl overflow-hidden ring-2 ring-[#ff5a00] shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform duration-200 shrink-0 bg-slate-900">
+              <img src="/assets/profile/vaibhav-suit.jpg" alt="Vaibhav Badhe" className="w-full h-full object-cover" />
             </div>
             <div>
               <div className="font-extrabold text-slate-900 tracking-tight text-base group-hover:text-[#ff5a00] transition-colors flex items-center gap-1.5">
