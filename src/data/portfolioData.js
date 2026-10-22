@@ -19,19 +19,92 @@ export const personalInfo = profile;
 
 export const metrics = [
   { value: 11, suffix: "+", label: "Production Apps", description: "Shipped across Android & iOS" },
-  { value: 2, suffix: "+", label: "Years Experience", description: "Infynod Tech & Baap Services" },
+  { value: 2, suffix: "+", label: "Years Experience", description: "Senior Flutter & Full Stack Lead" },
   { value: 8, suffix: "+", label: "Developers Mentored", description: "Code reviews & architectural guidance" },
-  { value: 3, suffix: "", label: "Payment Gateways", description: "Razorpay, Easebuzz, HDFC Juspay" },
-  { display: "Android + iOS", label: "Production Releases", description: "Play Store, App Store & TestFlight" },
-  { display: "US Client", label: "International Project", description: "Enterprise Workforce Management" },
+  { value: 3, suffix: "+ & IAP", label: "Payment & Monetization", description: "Razorpay, Easebuzz, HDFC & Play Billing" },
+  { display: "Play & App Store", label: "Store Releases", description: "Google Play, Apple App Store & TestFlight" },
+  { display: "US Enterprise", label: "International Project", description: "Simplify Workforce Management" },
 ];
 
 export const stats = [
-  { label: "Production Apps", value: "11+", icon: "Smartphone", description: "Shipped to Play Store & App Store" },
-  { label: "Years Experience", value: "2+", icon: "Briefcase", description: "Senior Flutter Developer" },
-  { label: "Current Company", value: "INFYNOD", icon: "Building", description: "Infynod Tech Private Limited" },
-  { label: "Payment Gateways", value: "3", icon: "CreditCard", description: "Razorpay, Easebuzz, HDFC Juspay" },
-  { label: "International Project", value: "US", icon: "Globe", description: "Enterprise Workforce Management" },
+  { 
+    id: "apps",
+    value: "11+", 
+    suffix: "Production Apps",
+    label: "Production Mobile Apps", 
+    subtitle: "Google Play Store & Apple App Store",
+    icon: "Smartphone",
+    accent: "blue",
+    badge: "Live on Stores",
+    highlight: "11+ Commercial Cross-Platform Apps",
+    pills: ["Google Play", "Apple App Store", "Android & iOS", "11+ Live Apps"],
+    description: "Shipped 11+ commercial applications spanning dating & matchmaking, enterprise workforce management, CRM, ERP, and on-demand mobility."
+  },
+  { 
+    id: "experience",
+    value: "2+", 
+    suffix: "Years Experience",
+    label: "Senior Flutter & Full-Stack Lead", 
+    subtitle: "End-to-End Product Engineering",
+    icon: "Award",
+    accent: "orange",
+    badge: "Best Employee 2025",
+    highlight: "Award Winner & 8+ Devs Mentored",
+    pills: ["Senior Flutter", "Node.js / Fastify", "MySQL & APIs", "8+ Mentored"],
+    description: "2+ years delivering end-to-end architecture from reactive Flutter UIs to Node.js/Fastify microservices, state management, and mentoring team members."
+  },
+  { 
+    id: "company",
+    value: "INFYNOD", 
+    suffix: "Tech Pvt Ltd",
+    label: "Current Company (2026 – Present)", 
+    subtitle: "Senior Flutter Developer • Pune, MH",
+    icon: "Building2",
+    accent: "emerald",
+    badge: "Current Role",
+    highlight: "Lead Mobile Engineer • Welvors App",
+    pills: ["Infynod Tech", "Pune, Maharashtra", "Welvors Matchmaking", "Lead Mobile"],
+    description: "Leading mobile product engineering at Infynod Tech Private Limited, architecting proprietary consumer apps like Welvors with real-time sockets & AI verification."
+  },
+  { 
+    id: "payments",
+    value: "3+ & IAP", 
+    suffix: "Gateways + Billing",
+    label: "Payments & In-App Purchases", 
+    subtitle: "Razorpay, Easebuzz, HDFC & Google Play Billing",
+    icon: "CreditCard",
+    accent: "purple",
+    badge: "Monetization Expert",
+    highlight: "UPI, Cards, Net Banking & In-App Subscriptions",
+    pills: ["Razorpay", "Easebuzz", "HDFC Juspay", "Google Play Billing", "In-App Purchases"],
+    description: "Production integration of Indian payment gateways (Razorpay, Easebuzz, HDFC Juspay) along with Google Play Billing for recurring subscriptions and in-app microtransactions."
+  },
+  { 
+    id: "international",
+    value: "US Client", 
+    suffix: "Enterprise Platform",
+    label: "International Project Delivery", 
+    subtitle: "Simplify Workforce VMS (US Corporate)",
+    icon: "Globe",
+    accent: "amber",
+    badge: "US Enterprise",
+    highlight: "Cross-Timezone & Multi-Locale Delivery",
+    pills: ["Simplify VMS", "US Client", "Cross-Timezone", "Localization", "Enterprise"],
+    description: "Architected and delivered Simplify Workforce VMS for a US enterprise client, managing jobs, candidates, assignments, timesheets, and multi-language localization."
+  },
+  { 
+    id: "devops",
+    value: "Cloud & Stores", 
+    suffix: "DevOps & Release",
+    label: "Deployment, Web Hosting & AWS", 
+    subtitle: "Play Store, App Store, AWS & CI/CD",
+    icon: "Cloud",
+    accent: "cyan",
+    badge: "Full DevOps",
+    highlight: "End-to-End Production Release Pipeline",
+    pills: ["Google Play Console", "App Store Connect", "TestFlight", "AWS Cloud", "Web Hosting", "CI/CD"],
+    description: "Complete release ownership: Google Play Console releases, Apple App Store Connect & TestFlight betas, AWS cloud instances, web hosting, and automated CI/CD pipelines."
+  }
 ];
 
 export const timeline = [
