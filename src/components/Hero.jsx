@@ -1,5 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const rotatingWords = [
+  { text: "Mobile Products", gradient: "from-orange-600 via-amber-500 to-orange-500", highlight: "11+ Live Production Apps" },
+  { text: "Flutter Ecosystems", gradient: "from-blue-600 via-indigo-500 to-sky-500", highlight: "Android & iOS Clean Architecture" },
+  { text: "Welvors Matchmaking", gradient: "from-rose-600 via-pink-500 to-orange-500", highlight: "Live Matchmaking & Verification" },
+  { text: "Enterprise Platforms", gradient: "from-amber-600 via-orange-500 to-yellow-600", highlight: "US Client Workforce VMS" },
+  { text: "Full-Stack APIs", gradient: "from-emerald-600 via-teal-500 to-cyan-600", highlight: "Node.js & Fastify Microservices" }
+];
 import { 
   ArrowRight, 
   Download, 
@@ -52,7 +60,16 @@ const photoOptions = [
 
 export default function Hero({ onOpenResume }) {
   const [activePhoto, setActivePhoto] = useState('desk');
+  const [wordIndex, setWordIndex] = useState(0);
   const currentPhoto = photoOptions.find(p => p.id === activePhoto) || photoOptions[0];
+
+  // Rotate hero keywords dynamically every 3.2s
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % rotatingWords.length);
+    }, 3200);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section id="about" className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-gradient-to-b from-white via-slate-50 to-[#f8fafc]">
@@ -85,25 +102,71 @@ export default function Hero({ onOpenResume }) {
               </span>
             </motion.div>
 
-            {/* Main Punchy Headline */}
-            <motion.h1 
-              initial={{ opacity: 0, y: 15 }}
+            {/* Main Punchy Headline with Dynamic Rotating Keyword & Shimmer */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.12]"
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-1"
             >
-              Architecting Production <span className="text-[#0f2552]">Mobile Products</span> That Scale Globally.
-            </motion.h1>
+              <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-black tracking-tight text-slate-900 leading-[1.14]">
+                <span>Architecting Production </span>
+                <span className="inline-block relative min-h-[1.25em] align-top">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={wordIndex}
+                      initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
+                      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                      exit={{ opacity: 0, y: -22, filter: 'blur(6px)' }}
+                      transition={{ duration: 0.45, ease: [0.2, 0.65, 0.3, 0.9] }}
+                      className={`inline-block font-black bg-gradient-to-r ${rotatingWords[wordIndex].gradient} bg-clip-text text-transparent underline decoration-orange-500/40 decoration-wavy decoration-2 underline-offset-8`}
+                    >
+                      {rotatingWords[wordIndex].text}
+                    </motion.span>
+                  </AnimatePresence>
+                </span>
+                <br className="hidden sm:inline" />
+                <span> That Scale Globally</span>
+                <span className="inline-flex items-center justify-center ml-1 text-[#ff5a00]">.</span>
+              </h1>
+            </motion.div>
 
-            {/* Sub-Headline & Bio */}
-            <motion.p 
-              initial={{ opacity: 0, y: 15 }}
+            {/* Sub-Headline & Bio Card with Left Accent Bar & Highlights */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl font-normal"
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="relative p-4 sm:p-5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-sm backdrop-blur-xs transition-all hover:shadow-md hover:border-orange-500/30"
             >
-              Hi, I'm <strong className="text-slate-900 font-extrabold">{personalInfo.name}</strong>. Senior Flutter Developer at <strong className="text-slate-900 font-bold">INFYNOD TECH PRIVATE LIMITED</strong>. I engineer high-performance, crash-free mobile applications for Android & iOS — including <strong className="text-slate-900 font-bold">Welvors</strong> (dating & social networking), US enterprise workforce platforms, and full-stack Node.js/Fastify microservices.
-            </motion.p>
+              {/* Left Accent Bar */}
+              <div className="absolute left-0 top-3 bottom-3 w-1.5 rounded-full bg-gradient-to-b from-orange-500 via-amber-400 to-blue-500" />
+
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal pl-2 sm:pl-3">
+                Hi, I'm <span className="font-extrabold text-slate-900 px-1.5 py-0.5 rounded-md bg-orange-50 border border-orange-200/70 inline-flex items-center gap-1.5">
+                  {personalInfo.name}
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                </span> — Senior Flutter Developer at <strong className="font-bold text-slate-900 px-1.5 py-0.5 rounded-md bg-slate-100 border border-slate-200 inline-block mt-1 sm:mt-0">
+                  INFYNOD TECH PRIVATE LIMITED
+                </strong>. I engineer high-performance, crash-free mobile applications for Android & iOS — including <span className="font-bold text-orange-700 bg-orange-50 border border-orange-200/70 px-1.5 py-0.5 rounded-md inline-block">
+                  Welvors
+                </span> (dating & social networking), US enterprise workforce platforms, and full-stack Node.js/Fastify microservices.
+              </p>
+
+              {/* Live Status Ticker connected to rotating word */}
+              <div className="mt-3.5 pt-3 border-t border-slate-100 pl-2 sm:pl-3 flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-slate-500">
+                <span className="flex items-center gap-1.5 text-slate-700">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  <span>Currently shipping proprietary mobile products at Infynod Tech, Pune</span>
+                </span>
+                <span className="text-[11px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-md border border-orange-200/60 flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 text-orange-500" />
+                  {rotatingWords[wordIndex].highlight}
+                </span>
+              </div>
+            </motion.div>
 
             {/* Cars24-style 4 Trust Checkpoints */}
             <motion.div 
