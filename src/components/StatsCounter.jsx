@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Smartphone, 
   Award, 
@@ -10,7 +10,11 @@ import {
   ArrowUpRight,
   Sparkles,
   ShieldCheck,
-  Server
+  ChevronLeft,
+  ChevronRight,
+  Layers,
+  Pause,
+  Play
 } from 'lucide-react';
 import { stats } from '../data/portfolioData';
 
@@ -21,11 +25,10 @@ const iconMap = {
   Building2,
   CreditCard,
   Globe,
-  Cloud,
-  Server
+  Cloud
 };
 
-// Theme configurations tailored for each capability card
+// Theme configurations for each capability card
 const themeStyles = {
   blue: {
     gradientBar: 'from-blue-500 via-indigo-500 to-sky-500',
@@ -35,6 +38,7 @@ const themeStyles = {
     statText: 'text-blue-600',
     highlightBg: 'bg-blue-50/70 text-blue-900 border-blue-100',
     pill: 'bg-blue-50/60 text-blue-800 border-blue-200/60 hover:bg-blue-100/70',
+    activeTab: 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20',
     hoverBorder: 'hover:border-blue-400 hover:shadow-blue-500/10'
   },
   orange: {
@@ -45,6 +49,7 @@ const themeStyles = {
     statText: 'text-orange-600',
     highlightBg: 'bg-orange-50/70 text-orange-900 border-orange-100',
     pill: 'bg-orange-50/60 text-orange-800 border-orange-200/60 hover:bg-orange-100/70',
+    activeTab: 'bg-orange-600 text-white border-orange-600 shadow-md shadow-orange-500/20',
     hoverBorder: 'hover:border-orange-400 hover:shadow-orange-500/10'
   },
   emerald: {
@@ -55,6 +60,7 @@ const themeStyles = {
     statText: 'text-emerald-600',
     highlightBg: 'bg-emerald-50/70 text-emerald-900 border-emerald-100',
     pill: 'bg-emerald-50/60 text-emerald-800 border-emerald-200/60 hover:bg-emerald-100/70',
+    activeTab: 'bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-500/20',
     hoverBorder: 'hover:border-emerald-400 hover:shadow-emerald-500/10'
   },
   purple: {
@@ -65,6 +71,7 @@ const themeStyles = {
     statText: 'text-purple-600',
     highlightBg: 'bg-purple-50/70 text-purple-900 border-purple-100',
     pill: 'bg-purple-50/60 text-purple-800 border-purple-200/60 hover:bg-purple-100/70',
+    activeTab: 'bg-purple-600 text-white border-purple-600 shadow-md shadow-purple-500/20',
     hoverBorder: 'hover:border-purple-400 hover:shadow-purple-500/10'
   },
   amber: {
@@ -75,6 +82,7 @@ const themeStyles = {
     statText: 'text-amber-600',
     highlightBg: 'bg-amber-50/70 text-amber-900 border-amber-100',
     pill: 'bg-amber-50/60 text-amber-800 border-amber-200/60 hover:bg-amber-100/70',
+    activeTab: 'bg-amber-600 text-white border-amber-600 shadow-md shadow-amber-500/20',
     hoverBorder: 'hover:border-amber-400 hover:shadow-amber-500/10'
   },
   cyan: {
@@ -85,150 +93,328 @@ const themeStyles = {
     statText: 'text-cyan-600',
     highlightBg: 'bg-cyan-50/70 text-cyan-900 border-cyan-100',
     pill: 'bg-cyan-50/60 text-cyan-800 border-cyan-200/60 hover:bg-cyan-100/70',
+    activeTab: 'bg-cyan-600 text-white border-cyan-600 shadow-md shadow-cyan-500/20',
     hoverBorder: 'hover:border-cyan-400 hover:shadow-cyan-500/10'
   }
 };
 
+const quickTabs = [
+  { id: "apps", label: "📱 11+ Apps" },
+  { id: "experience", label: "🏆 2+ Yrs Exp" },
+  { id: "company", label: "🏢 Infynod Tech" },
+  { id: "payments", label: "💳 Payments & IAP" },
+  { id: "international", label: "🌐 US Client" },
+  { id: "devops", label: "☁️ DevOps & Cloud" }
+];
+
 export default function StatsCounter() {
+  const scrollRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Update scroll boundaries & active card index on scroll
+  const handleScrollUpdate = () => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    setCanScrollLeft(scrollLeft > 10);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+
+    // Approximate active card
+    const cardWidth = 360 + 20; // width + gap
+    const index = Math.round(scrollLeft / cardWidth);
+    setActiveIndex(Math.min(Math.max(index, 0), stats.length - 1));
+  };
+
+  // Scroll by direction
+  const scroll = (direction) => {
+    if (!scrollRef.current) return;
+    const scrollAmount = 380;
+    scrollRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth'
+    });
+  };
+
+  // Scroll directly to a specific card index
+  const scrollToIndex = (index) => {
+    if (!scrollRef.current) return;
+    const cardWidth = 360 + 20;
+    scrollRef.current.scrollTo({
+      left: index * cardWidth,
+      behavior: 'smooth'
+    });
+    setActiveIndex(index);
+  };
+
+  // Auto-scroll loop every 5 seconds if not hovered and autoplay active
+  useEffect(() => {
+    if (!isAutoPlay || isHovered) return;
+
+    const timer = setInterval(() => {
+      if (!scrollRef.current) return;
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      
+      if (scrollLeft >= scrollWidth - clientWidth - 20) {
+        // Rewind to start smoothly
+        scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        scrollRef.current.scrollBy({ left: 380, behavior: 'smooth' });
+      }
+    }, 4500);
+
+    return () => clearInterval(timer);
+  }, [isAutoPlay, isHovered]);
+
   return (
-    <section className="py-16 md:py-20 bg-slate-50/60 border-y border-slate-200/90 relative overflow-hidden">
-      {/* Background subtle ambient glows */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none translate-y-1/2" />
+    <section className="py-10 sm:py-14 bg-slate-50/70 border-y border-slate-200/90 relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-0 left-1/3 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-xs mb-3.5 text-xs font-bold text-slate-700 tracking-wide uppercase">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            Core Capabilities & Verified Track Record
+        
+        {/* Top Header & Interactive Navigation Controls */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-2xs mb-2.5 text-[11px] font-bold text-slate-700 tracking-wide uppercase">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Core Capabilities & Verified Track Record
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Production Track Record & Key Capabilities
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 font-medium mt-1">
+              Swipe or use controls to view all 6 competencies — mobile delivery, payment gateways, US enterprise & DevOps.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Production Track Record & Key Capabilities
-          </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
-            End-to-end expertise spanning 11+ live apps, international US clients, multiple payment gateways & in-app purchases, current engineering leadership at Infynod Tech, and full DevOps deployment.
-          </p>
+
+          {/* Navigation Controls: Left/Right buttons + Card Counter */}
+          <div className="flex items-center gap-2.5 self-start md:self-auto shrink-0">
+            <button
+              onClick={() => setIsAutoPlay(!isAutoPlay)}
+              title={isAutoPlay ? "Pause Auto-Slide" : "Play Auto-Slide"}
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-600 hover:text-slate-900 hover:border-slate-300 transition-all shadow-2xs"
+            >
+              {isAutoPlay ? (
+                <>
+                  <Pause className="w-3.5 h-3.5 text-orange-500" />
+                  <span className="hidden sm:inline">Auto-Slide</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-3.5 h-3.5 text-slate-400" />
+                  <span className="hidden sm:inline">Paused</span>
+                </>
+              )}
+            </button>
+
+            <span className="text-xs font-bold text-slate-500 px-2 font-mono">
+              <span className="text-slate-900 font-black">{activeIndex + 1}</span> / {stats.length}
+            </span>
+
+            <button
+              onClick={() => scroll('left')}
+              disabled={!canScrollLeft}
+              aria-label="Previous capability"
+              className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all shadow-2xs ${
+                canScrollLeft 
+                  ? 'bg-white border-slate-200 text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95' 
+                  : 'bg-slate-100/60 border-slate-200/50 text-slate-300 cursor-not-allowed'
+              }`}
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            <button
+              onClick={() => scroll('right')}
+              disabled={!canScrollRight}
+              aria-label="Next capability"
+              className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all shadow-2xs ${
+                canScrollRight 
+                  ? 'bg-white border-slate-200 text-slate-800 hover:bg-slate-100 hover:border-slate-300 active:scale-95' 
+                  : 'bg-slate-100/60 border-slate-200/50 text-slate-300 cursor-not-allowed'
+              }`}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
-        {/* 6 High-Impact Capability Cards (3 columns on desktop, 2 on tablet, 1 on mobile) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-          {stats.map((stat, idx) => {
-            const theme = themeStyles[stat.accent] || themeStyles.blue;
-            const Icon = iconMap[stat.icon] || Smartphone;
-
+        {/* Quick Category Jump Tabs (Single-click scroll to any card) */}
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-3 mb-2">
+          {quickTabs.map((tab, idx) => {
+            const isActive = activeIndex === idx;
             return (
-              <div
-                key={stat.id || idx}
-                className={`group relative bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl ${theme.hoverBorder} transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden`}
+              <button
+                key={tab.id}
+                onClick={() => scrollToIndex(idx)}
+                className={`text-xs font-bold px-3 py-1.5 rounded-xl border whitespace-nowrap transition-all duration-200 shrink-0 ${
+                  isActive
+                    ? 'bg-orange-500 text-white border-orange-500 shadow-xs shadow-orange-500/25'
+                    : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
+                }`}
               >
-                {/* Top Colored Gradient Accent Line */}
-                <div className={`h-1.5 w-full bg-gradient-to-r ${theme.gradientBar}`} />
-
-                <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
-                  {/* Top Bar: Icon Container + Status Badge */}
-                  <div>
-                    <div className="flex items-center justify-between gap-3 mb-4">
-                      <div className={`w-12 h-12 rounded-xl ${theme.iconBg} border flex items-center justify-center shadow-xs transition-transform duration-300 group-hover:scale-110`}>
-                        <Icon className="w-6 h-6 stroke-[2.2]" />
-                      </div>
-
-                      <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${theme.badge} shadow-2xs`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${theme.dot}`} />
-                        {stat.badge}
-                      </div>
-                    </div>
-
-                    {/* Metric Value & Label */}
-                    <div className="mb-3">
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight font-mono">
-                          {stat.value}
-                        </span>
-                        {stat.suffix && (
-                          <span className={`text-xs sm:text-sm font-extrabold uppercase tracking-wider ${theme.statText}`}>
-                            {stat.suffix}
-                          </span>
-                        )}
-                      </div>
-                      <h3 className="text-base sm:text-lg font-bold text-slate-900 mt-1 leading-snug">
-                        {stat.label}
-                      </h3>
-                      <p className="text-xs font-semibold text-slate-500 mt-0.5">
-                        {stat.subtitle}
-                      </p>
-                    </div>
-
-                    {/* Highlight Box */}
-                    {stat.highlight && (
-                      <div className={`mb-3.5 px-3 py-2 rounded-xl border text-xs font-bold flex items-center gap-2 ${theme.highlightBg}`}>
-                        <Sparkles className="w-3.5 h-3.5 shrink-0 opacity-80" />
-                        <span className="truncate">{stat.highlight}</span>
-                      </div>
-                    )}
-
-                    {/* Description (No truncation, fully readable) */}
-                    <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal mb-4">
-                      {stat.description}
-                    </p>
-                  </div>
-
-                  {/* Technology & Competency Pills */}
-                  <div className="pt-3 border-t border-slate-100 mt-auto">
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
-                      Key Capabilities & Deliverables
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {stat.pills.map((pill, pillIdx) => (
-                        <span
-                          key={pillIdx}
-                          className={`text-[11px] font-semibold px-2.5 py-1 rounded-lg border transition-colors ${theme.pill}`}
-                        >
-                          {pill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom Card Footer Accent / Verification cue */}
-                <div className="px-6 py-2.5 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-500">
-                  <span className="flex items-center gap-1.5 text-emerald-700">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    Verified Production Track
-                  </span>
-                  <span className="text-slate-400 group-hover:text-slate-700 transition-colors flex items-center gap-0.5">
-                    Details
-                    <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </span>
-                </div>
-              </div>
+                {tab.label}
+              </button>
             );
           })}
         </div>
 
-        {/* Bottom Guarantee Banner */}
-        <div className="mt-12 bg-white rounded-2xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3.5 text-center md:text-left">
-            <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-200 text-orange-600 flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="text-sm font-bold text-slate-900">
-                End-to-End Ownership: From Architecture to App Store Approval & AWS Infrastructure
-              </div>
-              <div className="text-xs text-slate-500 mt-0.5">
-                Experienced in zero-downtime releases, Play Store policy compliance, TestFlight betas, payment security, and scalable cloud APIs.
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700">
-              <span className="w-2 h-2 rounded-full bg-green-500" />
-              Available for High-Impact Roles
-            </span>
+        {/* Single Row Horizontal Scrollable Carousel Track */}
+        <div 
+          className="relative"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {/* Scrollable Container */}
+          <div
+            ref={scrollRef}
+            onScroll={handleScrollUpdate}
+            className="flex gap-5 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-3 px-0.5"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+          >
+            {stats.map((stat, idx) => {
+              const theme = themeStyles[stat.accent] || themeStyles.blue;
+              const Icon = iconMap[stat.icon] || Smartphone;
+              const isCardActive = activeIndex === idx;
+
+              return (
+                <div
+                  key={stat.id || idx}
+                  className={`w-[320px] sm:w-[360px] md:w-[380px] shrink-0 snap-start bg-white rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden ${
+                    isCardActive 
+                      ? 'border-slate-300 shadow-lg ring-2 ring-orange-500/20' 
+                      : 'border-slate-200/90 shadow-xs hover:shadow-md'
+                  } ${theme.hoverBorder}`}
+                >
+                  {/* Top Colored Accent Gradient Strip */}
+                  <div className={`h-1.5 w-full bg-gradient-to-r ${theme.gradientBar}`} />
+
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      {/* Top Bar: Icon + Status Badge */}
+                      <div className="flex items-center justify-between gap-3 mb-3.5">
+                        <div className={`w-11 h-11 rounded-xl ${theme.iconBg} border flex items-center justify-center shadow-2xs`}>
+                          <Icon className="w-5 h-5 stroke-[2.2]" />
+                        </div>
+
+                        <div className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${theme.badge}`}>
+                          <span className={`w-1.5 h-1.5 rounded-full ${theme.dot}`} />
+                          {stat.badge}
+                        </div>
+                      </div>
+
+                      {/* Metric Display & Title */}
+                      <div className="mb-3">
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-mono">
+                            {stat.value}
+                          </span>
+                          {stat.suffix && (
+                            <span className={`text-[11px] sm:text-xs font-extrabold uppercase tracking-wider ${theme.statText}`}>
+                              {stat.suffix}
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="text-base font-bold text-slate-900 mt-1 leading-snug">
+                          {stat.label}
+                        </h3>
+                        <p className="text-xs font-semibold text-slate-500 mt-0.5">
+                          {stat.subtitle}
+                        </p>
+                      </div>
+
+                      {/* Highlight Pill Banner */}
+                      {stat.highlight && (
+                        <div className={`mb-3 px-2.5 py-1.5 rounded-lg border text-[11px] font-bold flex items-center gap-1.5 ${theme.highlightBg}`}>
+                          <Sparkles className="w-3.5 h-3.5 shrink-0 opacity-80" />
+                          <span className="truncate">{stat.highlight}</span>
+                        </div>
+                      )}
+
+                      {/* Description */}
+                      <p className="text-xs text-slate-600 leading-relaxed font-normal mb-3">
+                        {stat.description}
+                      </p>
+                    </div>
+
+                    {/* Key Capability Chips */}
+                    <div className="pt-3 border-t border-slate-100 mt-auto">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                        Key Capabilities & Deliverables
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {stat.pills.map((pill, pillIdx) => (
+                          <span
+                            key={pillIdx}
+                            className={`text-[10px] sm:text-[11px] font-semibold px-2 py-0.5 rounded-md border transition-colors ${theme.pill}`}
+                          >
+                            {pill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Bottom Strip */}
+                  <div className="px-5 py-2 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-500">
+                    <span className="flex items-center gap-1.5 text-emerald-700">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                      Verified Production Track
+                    </span>
+                    <span className="text-slate-400 group-hover:text-slate-700 transition-colors flex items-center gap-0.5">
+                      Details
+                      <ArrowUpRight className="w-3 h-3" />
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
+
+        {/* Carousel Pagination Dots & Swipe Hint */}
+        <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            {stats.map((_, dotIdx) => (
+              <button
+                key={dotIdx}
+                onClick={() => scrollToIndex(dotIdx)}
+                aria-label={`Jump to slide ${dotIdx + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  activeIndex === dotIdx 
+                    ? 'w-7 bg-orange-500 shadow-xs' 
+                    : 'w-2 bg-slate-300 hover:bg-slate-400'
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="text-[11px] font-bold text-slate-400 flex items-center gap-1.5">
+            <span>← Swipe horizontally to explore all 6 competencies →</span>
+          </div>
+        </div>
+
+        {/* Bottom Sleek Micro-Banner */}
+        <div className="mt-6 bg-white rounded-xl border border-slate-200 p-3.5 sm:p-4 shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2.5 text-slate-700 font-bold">
+            <div className="w-7 h-7 rounded-lg bg-orange-50 border border-orange-200 text-orange-600 flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-4 h-4" />
+            </div>
+            <span>
+              End-to-End Ownership: Architecture • Play & App Store Releases • In-App Billing • AWS Cloud Infrastructure
+            </span>
+          </div>
+
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 font-bold text-[11px] shrink-0">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            Available for Senior & Lead Roles
+          </span>
+        </div>
+
       </div>
     </section>
   );
