@@ -36,12 +36,12 @@ export const stats = [
 
 export const timeline = [
   { 
-    year: "2026 – Present", 
-    title: "Senior Flutter Developer", 
-    role: "Senior Flutter Developer",
-    company: "INFYNOD TECH PRIVATE LIMITED",
-    badge: "Current Company",
-    detail: "Leading mobile product engineering, architecture, and production delivery at Infynod Tech. Architected and launched Welvors (proprietary trust-first dating & matchmaking application) on Google Play with real-time WebSockets, AI selfie & ID verification, GetX state management, and in-app subscription billing." 
+    year: "2024", 
+    title: "Started Professional Development", 
+    role: "Flutter Developer",
+    company: "Baap Services Pvt. Ltd.",
+    badge: "Career Inception",
+    detail: "Joined Baap Services and began shipping Flutter features to production across CRM and ERP applications." 
   },
   { 
     year: "2025", 
@@ -49,15 +49,23 @@ export const timeline = [
     role: "Best Employee Award",
     company: "Baap Services Pvt. Ltd.",
     badge: "Excellence Recognized",
-    detail: "Recognised for stellar delivery ownership, zero-regression releases across enterprise CRM, ERP, and payment gateway integrations (Razorpay, Easebuzz, HDFC Juspay)." 
+    detail: "Recognised for exceptional delivery speed, code ownership, zero-regression releases and multiple payment gateway integrations (Razorpay, Easebuzz, HDFC Juspay)." 
   },
   { 
-    year: "2024", 
-    title: "Flutter & Full Stack Developer", 
-    role: "Flutter Developer",
+    year: "2026", 
+    title: "Senior Flutter & Full Stack Developer", 
+    role: "Senior Flutter & Full Stack Developer",
     company: "Baap Services Pvt. Ltd.",
-    badge: "Career Inception",
-    detail: "Began shipping production Flutter features, REST APIs with Node.js/Fastify, MySQL schemas, and cross-platform releases for Android and iOS." 
+    badge: "Senior Engineering Role",
+    detail: "10+ production apps, full-stack ownership with Node.js/Fastify backends, MySQL database schemas, AI chat integration, and mentoring 8+ developers." 
+  },
+  { 
+    year: "2026 – Present", 
+    title: "Senior Flutter Developer", 
+    role: "Senior Flutter Developer",
+    company: "INFYNOD TECH PRIVATE LIMITED, Pune",
+    badge: "Current Role",
+    detail: "Leading mobile product engineering, architecture, and production delivery at Infynod Tech. Architected and launched Welvors (proprietary trust-first dating & matchmaking application) on Google Play Store with real-time WebSockets, AI selfie & ID verification, GetX state management, and in-app subscription billing." 
   },
 ];
 

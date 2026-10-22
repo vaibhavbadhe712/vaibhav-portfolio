@@ -16,7 +16,8 @@ import {
   TrendingUp, 
   Clock, 
   Volume2, 
-  Check 
+  Check,
+  Flame
 } from 'lucide-react';
 import { GooglePlayIcon, AppStoreIcon } from './Icons';
 
