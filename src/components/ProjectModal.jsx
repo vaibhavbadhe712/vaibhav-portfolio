@@ -13,10 +13,17 @@ import {
   Star
 } from 'lucide-react';
 import { GooglePlayIcon, AppStoreIcon } from './Icons';
+import { playStoreAssets } from '../data/portfolioData';
 
 export default function ProjectModal({ project, onClose }) {
   if (!project) return null;
   const cs = project.caseStudy;
+  const asset = playStoreAssets[project.id] || {
+    icon: project.icon,
+    graphic: project.graphic
+  };
+  const iconUrl = project.icon || asset.icon;
+  const graphicUrl = project.graphic || asset.graphic;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">
@@ -26,8 +33,41 @@ export default function ProjectModal({ project, onClose }) {
       {/* Modal Card */}
       <div className="relative w-full max-w-4xl bg-white border border-slate-200 rounded-3xl p-6 sm:p-9 shadow-2xl overflow-y-auto max-h-[92vh] z-10 text-slate-800">
         
+        {/* Real Play Store Graphic Showcase Header Banner (if available) */}
+        {graphicUrl && (
+          <div className="relative h-44 sm:h-52 w-full -mt-6 sm:-mt-9 -mx-6 sm:-mx-9 mb-6 rounded-t-3xl overflow-hidden bg-slate-950">
+            <img 
+              src={graphicUrl} 
+              alt={`${project.name} Artwork`} 
+              className="w-full h-full object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/30" />
+            
+            {/* Close button in top-right of image */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 p-2 rounded-xl bg-slate-900/80 hover:bg-black text-white backdrop-blur-md border border-white/20 transition-all z-20 shadow-md"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Overlapping App Icon */}
+            <div className="absolute -bottom-5 left-6 sm:left-9 z-20">
+              <div className="w-16 h-16 rounded-2xl bg-white p-1 shadow-2xl border-2 border-white ring-1 ring-slate-200 overflow-hidden">
+                {iconUrl ? (
+                  <img src={iconUrl} alt={project.name} className="w-full h-full object-cover rounded-xl" />
+                ) : (
+                  <div className="w-full h-full bg-[#0f2552] text-white flex items-center justify-center font-bold text-xl rounded-xl">
+                    {project.initials || "APP"}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Header */}
-        <div className="flex items-start justify-between gap-4 border-b border-slate-100 pb-5">
+        <div className={`flex items-start justify-between gap-4 border-b border-slate-100 pb-5 ${graphicUrl ? 'pt-4' : ''}`}>
           <div className="space-y-1.5">
             <div className="flex flex-wrap items-center gap-2">
               <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-50 text-blue-800 border border-blue-200">
@@ -37,6 +77,11 @@ export default function ProjectModal({ project, onClose }) {
                 <span className="px-3 py-1 rounded-full text-xs font-mono font-black bg-amber-400 text-slate-950 flex items-center gap-1 shadow-sm">
                   <Star className="w-3.5 h-3.5 fill-slate-950" />
                   <span>US CLIENT PROJECT</span>
+                </span>
+              )}
+              {project.id === 'welvors' && (
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                  INFYNOD TECH PRODUCT
                 </span>
               )}
               {project.platform && (
@@ -54,12 +99,14 @@ export default function ProjectModal({ project, onClose }) {
             </p>
           </div>
 
-          <button
-            onClick={onClose}
-            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 hover:text-slate-900 transition-all shrink-0"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          {!graphicUrl && (
+            <button
+              onClick={onClose}
+              className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 hover:text-slate-900 transition-all shrink-0"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          )}
         </div>
 
         {/* Live Store Download Links Header Bar */}
