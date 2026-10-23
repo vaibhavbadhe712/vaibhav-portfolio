@@ -35,55 +35,66 @@ export default function ProjectCard({ project, onSelect }) {
       className="group rounded-3xl bg-white border border-slate-200/90 shadow-sm hover:shadow-2xl hover:shadow-slate-300/70 transition-all duration-300 flex flex-col justify-between overflow-hidden relative"
     >
       {/* 1. Real Play Store Feature Graphic Banner Container */}
-      <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-slate-950">
-        
-        {/* Real Play Store Screenshot / Graphic */}
-        {graphicUrl ? (
-          <img
-            src={graphicUrl}
-            alt={`${project.name} Play Store Artwork`}
-            loading="lazy"
-            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-slate-900 to-slate-950 flex items-center justify-center text-slate-700">
-            <Smartphone className="w-12 h-12" />
-          </div>
-        )}
-
-        {/* Ambient Gradient Vignette Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent pointer-events-none" />
-
-        {/* Top Badges Bar */}
-        <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10">
-          
-          {/* Category Chip */}
-          <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-slate-900/80 backdrop-blur-md text-white border border-white/20 shadow-md flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>{project.category?.split('/')[0]?.trim()}</span>
-          </span>
-
-          {/* Status Chip */}
-          {project.id === 'welvors' ? (
-            <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-black bg-rose-500 text-white shadow-md flex items-center gap-1 border border-rose-400/40">
-              <Star className="w-3 h-3 fill-white" />
-              <span>INFYNOD PRODUCT</span>
-            </span>
-          ) : project.usClient ? (
-            <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-black bg-amber-400 text-slate-950 shadow-md flex items-center gap-1">
-              <Star className="w-3 h-3 fill-slate-950" />
-              <span>US CLIENT</span>
-            </span>
+      <div className="relative w-full">
+        {/* Banner with overflow-hidden for artwork zoom only */}
+        <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-slate-950">
+          {/* Real Play Store Screenshot / Graphic */}
+          {graphicUrl ? (
+            <img
+              src={graphicUrl}
+              alt={`${project.name} Play Store Artwork`}
+              loading="lazy"
+              className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
           ) : (
-            <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-slate-900/80 backdrop-blur-md text-emerald-300 border border-emerald-500/30 shadow-md flex items-center gap-1">
-              <span>● Production Live</span>
-            </span>
+            <div className="w-full h-full bg-gradient-to-br from-slate-900 to-slate-950 flex items-center justify-center text-slate-700">
+              <Smartphone className="w-12 h-12" />
+            </div>
           )}
+
+          {/* Ambient Gradient Vignette Overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent pointer-events-none" />
+
+          {/* Top Badges Bar */}
+          <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10">
+            {/* Category Chip */}
+            <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-slate-900/80 backdrop-blur-md text-white border border-white/20 shadow-md flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>{project.category?.split('/')[0]?.trim()}</span>
+            </span>
+
+            {/* Status Chip */}
+            {project.id === 'welvors' ? (
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-black bg-rose-500 text-white shadow-md flex items-center gap-1 border border-rose-400/40">
+                <Star className="w-3 h-3 fill-white" />
+                <span>INFYNOD PRODUCT</span>
+              </span>
+            ) : project.usClient ? (
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-black bg-amber-400 text-slate-950 shadow-md flex items-center gap-1">
+                <Star className="w-3 h-3 fill-slate-950" />
+                <span>US CLIENT</span>
+              </span>
+            ) : (
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-slate-900/80 backdrop-blur-md text-emerald-300 border border-emerald-500/30 shadow-md flex items-center gap-1">
+                <span>● Production Live</span>
+              </span>
+            )}
+          </div>
+
+          {/* Floating Store Badge pill in bottom-right of header */}
+          <div className="absolute bottom-3 right-3 z-10">
+            {project.playStore && (
+              <span className="px-2.5 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-slate-300 text-[10px] font-mono font-semibold border border-white/10 flex items-center gap-1">
+                <GooglePlayIcon className="w-2.5 h-2.5 fill-emerald-400" />
+                <span>Google Play Verified</span>
+              </span>
+            )}
+          </div>
         </div>
 
-        {/* Overlapping Floating Real App Icon (Squircle shape breaking the edge) */}
-        <div className="absolute -bottom-6 left-6 z-20">
-          <div className="w-14 h-14 rounded-2xl bg-white p-1 shadow-xl border-2 border-white ring-1 ring-slate-200/80 overflow-hidden group-hover:scale-105 transition-transform duration-300">
+        {/* Overlapping Floating Real App Icon (Outside overflow-hidden so 100% of icon displays over white section) */}
+        <div className="absolute -bottom-7 left-6 z-30">
+          <div className="w-14 h-14 rounded-2xl bg-white p-1 shadow-xl border-2 border-white ring-1 ring-slate-200/90 overflow-hidden group-hover:scale-110 transition-transform duration-300">
             {iconUrl ? (
               <img
                 src={iconUrl}
@@ -98,21 +109,10 @@ export default function ProjectCard({ project, onSelect }) {
             )}
           </div>
         </div>
-
-        {/* Floating Store Badge pill in bottom-right of header */}
-        <div className="absolute bottom-3 right-3 z-10">
-          {project.playStore && (
-            <span className="px-2.5 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-slate-300 text-[10px] font-mono font-semibold border border-white/10 flex items-center gap-1">
-              <GooglePlayIcon className="w-2.5 h-2.5 fill-emerald-400" />
-              <span>Google Play Verified</span>
-            </span>
-          )}
-        </div>
-
       </div>
 
       {/* 2. Content Body Area */}
-      <div className="pt-9 px-6 pb-6 bg-white flex-1 flex flex-col justify-between space-y-4">
+      <div className="pt-10 px-6 pb-6 bg-white flex-1 flex flex-col justify-between space-y-4 relative z-10">
         
         <div>
           {/* Header Row: Title & Platform Badge */}

@@ -35,25 +35,27 @@ export default function ProjectModal({ project, onClose }) {
         
         {/* Real Play Store Graphic Showcase Header Banner (if available) */}
         {graphicUrl && (
-          <div className="relative h-44 sm:h-52 w-full -mt-6 sm:-mt-9 -mx-6 sm:-mx-9 mb-6 rounded-t-3xl overflow-hidden bg-slate-950">
-            <img 
-              src={graphicUrl} 
-              alt={`${project.name} Artwork`} 
-              className="w-full h-full object-cover object-top"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/30" />
-            
-            {/* Close button in top-right of image */}
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 p-2 rounded-xl bg-slate-900/80 hover:bg-black text-white backdrop-blur-md border border-white/20 transition-all z-20 shadow-md"
-            >
-              <X className="w-5 h-5" />
-            </button>
+          <div className="relative w-full -mt-6 sm:-mt-9 -mx-6 sm:-mx-9 mb-6">
+            <div className="relative h-44 sm:h-52 w-full rounded-t-3xl overflow-hidden bg-slate-950">
+              <img 
+                src={graphicUrl} 
+                alt={`${project.name} Artwork`} 
+                className="w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/30" />
+              
+              {/* Close button in top-right of image */}
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 p-2 rounded-xl bg-slate-900/80 hover:bg-black text-white backdrop-blur-md border border-white/20 transition-all z-20 shadow-md"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-            {/* Overlapping App Icon */}
-            <div className="absolute -bottom-5 left-6 sm:left-9 z-20">
-              <div className="w-16 h-16 rounded-2xl bg-white p-1 shadow-2xl border-2 border-white ring-1 ring-slate-200 overflow-hidden">
+            {/* Overlapping App Icon (Outside overflow-hidden so 100% of icon displays above white modal section) */}
+            <div className="absolute -bottom-6 left-6 sm:left-9 z-30">
+              <div className="w-16 h-16 rounded-2xl bg-white p-1 shadow-2xl border-2 border-white ring-1 ring-slate-200/90 overflow-hidden">
                 {iconUrl ? (
                   <img src={iconUrl} alt={project.name} className="w-full h-full object-cover rounded-xl" />
                 ) : (

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const rotatingWords = [
-  { text: "Mobile Products", gradient: "from-orange-600 via-amber-500 to-orange-500", highlight: "11+ Live Production Apps" },
-  { text: "Flutter Ecosystems", gradient: "from-blue-600 via-indigo-500 to-sky-500", highlight: "Android & iOS Clean Architecture" },
-  { text: "Welvors Matchmaking", gradient: "from-rose-600 via-pink-500 to-orange-500", highlight: "Live Matchmaking & Verification" },
-  { text: "Enterprise Platforms", gradient: "from-amber-600 via-orange-500 to-yellow-600", highlight: "US Client Workforce VMS" },
-  { text: "Full-Stack APIs", gradient: "from-emerald-600 via-teal-500 to-cyan-600", highlight: "Node.js & Fastify Microservices" }
+  { text: "Mobile Products", gradient: "from-orange-600 via-amber-500 to-orange-500" },
+  { text: "Flutter Platforms", gradient: "from-blue-600 via-indigo-500 to-sky-500" },
+  { text: "Welvors Dating", gradient: "from-rose-600 via-pink-500 to-orange-500" },
+  { text: "Enterprise VMS", gradient: "from-amber-600 via-orange-500 to-yellow-600" },
+  { text: "Full-Stack APIs", gradient: "from-emerald-600 via-teal-500 to-cyan-600" }
 ];
 import { 
   ArrowRight, 
@@ -34,7 +34,7 @@ import { personalInfo } from '../data/portfolioData';
 const photoOptions = [
   {
     id: 'desk',
-    label: 'At Workspace',
+    label: 'Workspace',
     icon: Laptop,
     src: '/assets/profile/vaibhav-desk.jpg',
     tag: 'Lead Mobile Architect',
@@ -82,18 +82,18 @@ export default function Hero({ onOpenResume }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Left Column: High-Trust Executive Pitch (7 Cols) */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-4 sm:space-y-6">
             
             {/* Trust Pill with Live Radar Pulse */}
             <motion.div 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200/90 text-orange-800 text-xs font-bold tracking-wide shadow-sm"
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-orange-50 border border-orange-200/90 text-orange-800 text-xs font-bold tracking-wide shadow-xs"
             >
-              <span className="relative flex h-2.5 w-2.5">
+              <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff5a00] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#ff5a00]" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ff5a00]" />
               </span>
               <span>SENIOR FLUTTER DEVELOPER @ INFYNOD TECH</span>
               <span className="text-slate-300">|</span>
@@ -102,71 +102,46 @@ export default function Hero({ onOpenResume }) {
               </span>
             </motion.div>
 
-            {/* Main Punchy Headline with Dynamic Rotating Keyword & Shimmer */}
+            {/* Main Punchy Headline with Dynamic Rotating Keyword */}
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-1"
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-black tracking-tight text-slate-900 leading-[1.14]">
-                <span>Architecting Production </span>
-                <span className="inline-block relative min-h-[1.25em] align-top">
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={wordIndex}
-                      initial={{ opacity: 0, y: 22, filter: 'blur(6px)' }}
-                      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                      exit={{ opacity: 0, y: -22, filter: 'blur(6px)' }}
-                      transition={{ duration: 0.45, ease: [0.2, 0.65, 0.3, 0.9] }}
-                      className={`inline-block font-black bg-gradient-to-r ${rotatingWords[wordIndex].gradient} bg-clip-text text-transparent underline decoration-orange-500/40 decoration-wavy decoration-2 underline-offset-8`}
-                    >
-                      {rotatingWords[wordIndex].text}
-                    </motion.span>
-                  </AnimatePresence>
-                </span>
-                <br className="hidden sm:inline" />
-                <span> That Scale Globally</span>
-                <span className="inline-flex items-center justify-center ml-1 text-[#ff5a00]">.</span>
+              <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[46px] font-black tracking-tight text-slate-900 leading-tight flex flex-col gap-1.5 sm:gap-2">
+                <span>Architecting Production</span>
+                <div className="flex items-baseline gap-2.5">
+                  <span className="inline-block relative">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={wordIndex}
+                        initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+                        transition={{ duration: 0.35, ease: [0.2, 0.65, 0.3, 0.9] }}
+                        className={`inline-block font-black bg-gradient-to-r ${rotatingWords[wordIndex].gradient} bg-clip-text text-transparent`}
+                      >
+                        {rotatingWords[wordIndex].text}
+                      </motion.span>
+                    </AnimatePresence>
+                  </span>
+                  <span>That</span>
+                </div>
+                <div>
+                  <span>Scale Globally</span><span className="text-[#ff5a00]">.</span>
+                </div>
               </h1>
             </motion.div>
 
-            {/* Sub-Headline & Bio Card with Left Accent Bar & Highlights */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+            {/* Sub-Headline & Bio (Clean, balanced, no excessive height) */}
+            <motion.p 
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="relative p-4 sm:p-5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-sm backdrop-blur-xs transition-all hover:shadow-md hover:border-orange-500/30"
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl font-normal"
             >
-              {/* Left Accent Bar */}
-              <div className="absolute left-0 top-3 bottom-3 w-1.5 rounded-full bg-gradient-to-b from-orange-500 via-amber-400 to-blue-500" />
-
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal pl-2 sm:pl-3">
-                Hi, I'm <span className="font-extrabold text-slate-900 px-1.5 py-0.5 rounded-md bg-orange-50 border border-orange-200/70 inline-flex items-center gap-1.5">
-                  {personalInfo.name}
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                </span> — Senior Flutter Developer at <strong className="font-bold text-slate-900 px-1.5 py-0.5 rounded-md bg-slate-100 border border-slate-200 inline-block mt-1 sm:mt-0">
-                  INFYNOD TECH PRIVATE LIMITED
-                </strong>. I engineer high-performance, crash-free mobile applications for Android & iOS — including <span className="font-bold text-orange-700 bg-orange-50 border border-orange-200/70 px-1.5 py-0.5 rounded-md inline-block">
-                  Welvors
-                </span> (dating & social networking), US enterprise workforce platforms, and full-stack Node.js/Fastify microservices.
-              </p>
-
-              {/* Live Status Ticker connected to rotating word */}
-              <div className="mt-3.5 pt-3 border-t border-slate-100 pl-2 sm:pl-3 flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-slate-500">
-                <span className="flex items-center gap-1.5 text-slate-700">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                  </span>
-                  <span>Currently shipping proprietary mobile products at Infynod Tech, Pune</span>
-                </span>
-                <span className="text-[11px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-md border border-orange-200/60 flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-orange-500" />
-                  {rotatingWords[wordIndex].highlight}
-                </span>
-              </div>
-            </motion.div>
+              Hi, I'm <strong className="font-extrabold text-slate-900">{personalInfo.name}</strong> — Senior Flutter Developer at <strong className="font-bold text-slate-900">INFYNOD TECH PRIVATE LIMITED</strong>. I engineer high-performance, crash-free mobile applications for Android & iOS — including <span className="font-bold text-orange-600">Welvors</span> (dating & social networking), US enterprise workforce platforms, and full-stack Node.js/Fastify microservices.
+            </motion.p>
 
             {/* Cars24-style 4 Trust Checkpoints */}
             <motion.div 
@@ -364,43 +339,43 @@ export default function Hero({ onOpenResume }) {
 
             </motion.div>
 
-            {/* Floating Trust Badge 1: Best Employee 2025 (Top Right) */}
+            {/* Floating Trust Badge 1: Best Employee 2025 (Top Right - Pushed to side) */}
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               whileHover={{ scale: 1.05 }}
-              className="hidden sm:flex absolute -top-5 -right-6 bg-white border border-slate-200 rounded-2xl p-3 shadow-xl items-center gap-3 z-20 backdrop-blur-sm"
+              className="hidden sm:flex absolute -top-6 -right-6 sm:-right-10 lg:-right-16 bg-white border border-slate-200/90 rounded-2xl p-3 shadow-xl items-center gap-3 z-20 backdrop-blur-sm"
             >
               <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-lg border border-amber-200 shadow-inner">
                 🏆
               </div>
               <div className="text-xs">
-                <div className="font-extrabold text-slate-900 flex items-center gap-1">
+                <div className="font-extrabold text-slate-900 flex items-center gap-1 whitespace-nowrap">
                   <span>Best Employee Award</span>
                   <span className="px-1.5 py-0.2 rounded bg-amber-100 text-amber-800 text-[9px] font-mono">2025</span>
                 </div>
-                <div className="text-slate-500 text-[11px] font-medium">Baap Services • Ownership</div>
+                <div className="text-slate-500 text-[11px] font-medium whitespace-nowrap">Baap Services • Ownership</div>
               </div>
             </motion.div>
 
-            {/* Floating Trust Badge 2: Infynod Tech Role (Bottom Left) */}
+            {/* Floating Trust Badge 2: Infynod Tech Role (Bottom Left - Kept down, pushed to the side) */}
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               whileHover={{ scale: 1.05 }}
-              className="hidden sm:flex absolute -bottom-5 -left-6 bg-white border border-slate-200 rounded-2xl p-3 shadow-xl items-center gap-3 z-20 backdrop-blur-sm"
+              className="hidden sm:flex absolute -bottom-5 -left-10 sm:-left-10 lg:-left-20 bg-white border border-slate-200/90 rounded-2xl p-2.5 sm:p-3 shadow-xl items-center gap-2.5 sm:gap-3 z-20 backdrop-blur-sm"
             >
-              <div className="w-10 h-10 rounded-xl bg-orange-50 text-[#ff5a00] flex items-center justify-center font-bold text-lg border border-orange-200 shadow-inner">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-orange-50 text-[#ff5a00] flex items-center justify-center font-bold text-base sm:text-lg border border-orange-200 shadow-inner shrink-0">
                 ⚡
               </div>
               <div className="text-xs">
-                <div className="font-extrabold text-slate-900 flex items-center gap-1">
+                <div className="font-extrabold text-slate-900 flex items-center gap-1 whitespace-nowrap">
                   <span>Senior Flutter Developer</span>
                 </div>
-                <div className="text-slate-600 text-[11px] font-semibold flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
+                <div className="text-slate-600 text-[11px] font-semibold flex items-center gap-1 whitespace-nowrap">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block shrink-0" />
                   <span>INFYNOD TECH PVT LTD</span>
                 </div>
               </div>
