@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, FileText, Send, Sparkles, Phone, ArrowUpRight } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
-export default function Navbar({ onOpenResume }) {
+export default function Navbar({ onOpenResume, onOpenCertifications }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -20,6 +20,7 @@ export default function Navbar({ onOpenResume }) {
     { name: 'AI Features', href: '#ai' },
     { name: 'Open Source', href: '#open-source' },
     { name: 'Tech Stack', href: '#skills' },
+    { name: 'Certifications', href: '#certifications' },
     { name: 'Milestones', href: '#experience' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -49,13 +50,19 @@ export default function Navbar({ onOpenResume }) {
             </div>
           </a>
 
-          {/* Desktop Nav Pills */}
-          <nav className="hidden lg:flex items-center gap-1 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/80">
+          {/* Desktop Nav Pills (Sleek single-line, zero wrapping) */}
+          <nav className="hidden xl:flex items-center gap-0.5 bg-slate-100/90 p-1 rounded-full border border-slate-200/90 shadow-2xs">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="px-4 py-1.5 text-xs font-bold text-slate-600 hover:text-slate-900 hover:bg-white rounded-full transition-all duration-150 hover:shadow-sm"
+                onClick={(e) => {
+                  if (link.name === 'Certifications' && onOpenCertifications) {
+                    e.preventDefault();
+                    onOpenCertifications();
+                  }
+                }}
+                className="px-3 py-1.5 text-xs font-bold text-slate-600 hover:text-slate-900 hover:bg-white rounded-full transition-all duration-150 hover:shadow-sm whitespace-nowrap leading-none"
               >
                 {link.name}
               </a>
@@ -63,42 +70,48 @@ export default function Navbar({ onOpenResume }) {
           </nav>
 
           {/* Action CTAs */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2.5">
             <button
               onClick={onOpenResume}
-              className="flex items-center gap-1.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl transition-all shadow-sm hover:shadow"
+              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl transition-all shadow-sm hover:shadow whitespace-nowrap"
             >
               <FileText className="w-3.5 h-3.5 text-[#ff5a00]" />
               <span>Resume</span>
             </button>
             <a
               href="#contact"
-              className="flex items-center gap-1.5 px-5 py-2.5 text-xs font-bold text-white bg-[#ff5a00] hover:bg-[#ea5000] rounded-xl shadow-md shadow-orange-500/25 transition-all hover:shadow-orange-500/40 hover:-translate-y-0.5"
+              className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-[#ff5a00] hover:bg-[#ea5000] rounded-xl shadow-md shadow-orange-500/25 transition-all hover:shadow-orange-500/40 hover:-translate-y-0.5 whitespace-nowrap"
             >
               <Send className="w-3.5 h-3.5" />
               <span>Get In Touch</span>
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile / Tablet Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900"
+            className="xl:hidden p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5 text-slate-800" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-5 pt-4 pb-6 space-y-2 shadow-xl animate-fadeIn">
+        <div className="xl:hidden bg-white border-b border-slate-200 px-5 pt-4 pb-6 space-y-2 shadow-xl animate-fadeIn">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                if (link.name === 'Certifications' && onOpenCertifications) {
+                  e.preventDefault();
+                  onOpenCertifications();
+                }
+              }}
               className="block px-3.5 py-2.5 rounded-xl text-sm font-bold text-slate-700 hover:text-[#ff5a00] hover:bg-slate-50"
             >
               {link.name}

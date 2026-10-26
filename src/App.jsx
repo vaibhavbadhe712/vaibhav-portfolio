@@ -6,19 +6,25 @@ import ProjectsSection from './components/ProjectsSection';
 import AISection from './components/AISection';
 import OpenSourceSection from './components/OpenSourceSection';
 import TechStackSection from './components/TechStackSection';
+import CertificationsSection from './components/CertificationsSection';
 import ExperienceTimeline from './components/ExperienceTimeline';
 import ArchitecturePhilosophy from './components/ArchitecturePhilosophy';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import ResumeModal from './components/ResumeModal';
+import CertificatesModal from './components/CertificatesModal';
 
 export default function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const [isCertModalOpen, setIsCertModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col selection:bg-orange-500/20 selection:text-orange-600">
       {/* Top Navbar */}
-      <Navbar onOpenResume={() => setIsResumeOpen(true)} />
+      <Navbar 
+        onOpenResume={() => setIsResumeOpen(true)} 
+        onOpenCertifications={() => setIsCertModalOpen(true)}
+      />
 
       {/* Main Content */}
       <main className="flex-1">
@@ -42,6 +48,9 @@ export default function App() {
         {/* Full Stack Tech Stack, Payment Gateways & Store Releases */}
         <TechStackSection />
 
+        {/* Verified Industry Certifications & Google AI Credentials */}
+        <CertificationsSection onOpenAllCertificates={() => setIsCertModalOpen(true)} />
+
         {/* Career Timeline & Best Employee Award */}
         <ExperienceTimeline />
 
@@ -58,6 +67,11 @@ export default function App() {
       {/* Interactive PDF Resume Modal */}
       {isResumeOpen && (
         <ResumeModal onClose={() => setIsResumeOpen(false)} />
+      )}
+
+      {/* Dedicated Comprehensive Certifications & Credentials Modal Hub */}
+      {isCertModalOpen && (
+        <CertificatesModal onClose={() => setIsCertModalOpen(false)} />
       )}
     </div>
   );

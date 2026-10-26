@@ -849,3 +849,234 @@ export const openSource = {
     "Works seamlessly on both Android and iOS"
   ]
 };
+
+export const googleAISpecialization = {
+  id: "google-ai-specialization",
+  title: "Google AI Professional Certificate",
+  issuer: "Google Career Certificates",
+  platform: "Coursera Verified Specialization",
+  badge: "Specialization (8 Courses Completed)",
+  status: "Completed",
+  credentialId: "D9ARSI9NJK5Z",
+  verifyUrl: "https://www.coursera.org/account/accomplishments/specialization/D9ARSI9NJK5Z",
+  imageUrl: "/assets/certificates/google-ai-specialization-cert.jpg",
+  description: "Official 8-course comprehensive professional credential by Google certifying deep fluency in Generative AI, LLMs, prompt architecture, AI for mobile app building, data analysis, and production deployment.",
+  skills: [
+    "Generative AI",
+    "LLM Prompt Engineering",
+    "AI for App Building",
+    "AI for Data Analysis",
+    "AI Workflow Automation",
+    "Cloud Integration"
+  ]
+};
+
+export const googleAICourses = [
+  {
+    id: "ai-fundamentals",
+    name: "AI Fundamentals",
+    code: "Course 1 of 8",
+    status: "Completed",
+    recordId: "A1Z109HW3FIV",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/verify/A1Z109HW3FIV",
+    imageUrl: "/assets/certificates/google-ai-course-1-cert.jpg",
+    description: "Core AI principles, neural networks, machine learning algorithms, and real-world generative AI use cases.",
+    skills: ["AI Fundamentals", "Machine Learning", "Generative AI Foundations"]
+  },
+  {
+    id: "ai-brainstorming",
+    name: "AI for Brainstorming and Planning",
+    code: "Course 2 of 8",
+    status: "Completed",
+    recordId: "GE8BDRBJMPKF",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/GE8BDRBJMPKF",
+    imageUrl: "/assets/certificates/google-ai-course-2-cert.jpg",
+    description: "Leveraging generative AI for strategic architecture roadmaps, product ideation, risk mitigation, and project breakdown.",
+    skills: ["AI Ideation", "Product Strategy", "Architecture Planning"]
+  },
+  {
+    id: "ai-research",
+    name: "AI for Research and Insights",
+    code: "Course 3 of 8",
+    status: "Completed",
+    recordId: "25T2NHBXYJK9",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/25T2NHBXYJK9",
+    imageUrl: "/assets/certificates/google-ai-course-3-cert.jpg",
+    description: "Information synthesis, data extraction, competitive benchmarking, and insight generation using modern LLMs.",
+    skills: ["Data Synthesis", "Market Intelligence", "LLM Research Automation"]
+  },
+  {
+    id: "ai-writing",
+    name: "AI for Writing and Communicating",
+    code: "Course 4 of 8",
+    status: "Completed",
+    recordId: "QSFE5BXYZK77",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/QSFE5BXYZK77",
+    imageUrl: "/assets/certificates/google-ai-course-4-cert.jpg",
+    description: "Structured prompt crafting, technical documentation generation, stakeholder reports, and executive summaries.",
+    skills: ["Prompt Engineering", "Technical Writing", "Structured Communication"]
+  },
+  {
+    id: "ai-content",
+    name: "AI for Content Creation",
+    code: "Course 5 of 8",
+    status: "Completed",
+    recordId: "QQ7657MDFH9P",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/QQ7657MDFH9P",
+    imageUrl: "/assets/certificates/google-ai-course-5-cert.jpg",
+    description: "Multimodal AI workflows, creative media asset pipelines, marketing copy, and UI/UX design mockups.",
+    skills: ["Multimodal AI", "Media Pipelines", "Asset Generation"]
+  },
+  {
+    id: "ai-data-analysis",
+    name: "AI for Data Analysis",
+    code: "Course 6 of 8",
+    status: "Completed",
+    recordId: "TYCJZEUOJNRU",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/TYCJZEUOJNRU",
+    imageUrl: "/assets/certificates/google-ai-course-6-cert.jpg",
+    description: "Exploratory data analysis, automated analytics queries, metric visualization, and forecasting user retention patterns.",
+    skills: ["Data Analysis", "Metric Visualizations", "Predictive Queries"]
+  },
+  {
+    id: "ai-app-building",
+    name: "AI for App Building",
+    code: "Course 7 of 8",
+    status: "Completed",
+    recordId: "GSUKRFYERQJ0",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/GSUKRFYERQJ0",
+    imageUrl: "/assets/certificates/google-ai-course-7-cert.jpg",
+    description: "Building production-grade applications powered by generative AI, LLM API streaming, custom agent tools, and full-stack integration.",
+    skills: ["AI-Powered Mobile Apps", "LLM APIs", "Agent Tooling", "Rapid Prototyping"]
+  },
+  {
+    id: "ai-app-deployment",
+    name: "AI for App Deployment",
+    code: "Course 8 of 8",
+    status: "Completed",
+    recordId: "ENFLF0UCW780",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/ENFLF0UCW780",
+    imageUrl: "/assets/certificates/google-ai-course-8-cert.jpg",
+    description: "Continuous integration, cloud deployment pipelines, model monitoring, latency optimization, and scale management.",
+    skills: ["Deployment Pipelines", "Cloud Scale", "Model Monitoring", "Production Release"]
+  }
+];
+
+export const linkedinCertificates = [
+  {
+    id: "google-flutter-dart",
+    title: "Google Flutter & Dart Certification",
+    issuer: "TheDigitalAdda",
+    issueDate: "May 2024",
+    credentialId: "DA/GFD/23/12778",
+    imageUrl: "/assets/certificates/google-flutter-dart-cert.jpg",
+    platform: "TheDigitalAdda • ISO 9001:2015",
+    category: "Mobile & Flutter",
+    verifyUrl: "https://www.linkedin.com/in/vaibhavbadhe-flutter/details/certifications/",
+    description: "Successfully completed the Google Flutter & Dart Certification Program offered by The Digital Adda. Covered core Flutter architecture, reactive state management, asynchronous Dart, and cross-platform UI engineering.",
+    skills: ["Flutter", "Dart", "State Management", "Cross-Platform Mobile", "API Integration"]
+  },
+  {
+    id: "ai-driven-flutter",
+    title: "AI-Driven Flutter Mobile App Development",
+    issuer: "WOW Light Signal AI Academy",
+    issueDate: "August 2026",
+    credentialId: "WOW-AI-FLUTTER-FDP",
+    imageUrl: "/assets/certificates/ai-driven-flutter-cert.jpg",
+    platform: "WOW Light Signal AI Academy",
+    category: "AI & Mobile",
+    verifyUrl: "https://www.linkedin.com/in/vaibhavbadhe-flutter/details/certifications/",
+    description: "Successfully completed the 5-Day Online Faculty Development Program on AI-Driven Flutter Mobile App Development organized by WOW Light Signal AI Academy. Focus on LLM integration, AI agent tooling, and smart mobile apps.",
+    skills: ["AI-Driven Flutter", "LLM Integration", "Mobile AI Agents", "Smart UI Engineering"]
+  },
+  {
+    id: "react-js-cert",
+    title: "React JS Certification",
+    issuer: "TheDigitalAdda",
+    issueDate: "November 2025",
+    credentialId: "DA/RJS/23/11758",
+    imageUrl: "/assets/certificates/react-js-cert.jpg",
+    platform: "TheDigitalAdda • ISO 9001:2015",
+    category: "Web & Frontend",
+    verifyUrl: "https://www.linkedin.com/in/vaibhavbadhe-flutter/details/certifications/",
+    description: "Successfully completed the React JS Certification Program from The Digital Adda, covering modern React hooks, component lifecycle, state handling, and single-page applications.",
+    skills: ["React.js", "JavaScript", "Frontend Architecture", "Hooks & Lifecycle"]
+  }
+];
+
+export const certifications = [
+  {
+    id: "google-ai",
+    title: "Google AI Professional Certificate",
+    issuer: "Google Career Certificates",
+    organization: "Google",
+    platform: "Coursera Verified Specialization",
+    issueDate: "October 2026",
+    badge: "Specialization (8 Courses)",
+    category: "AI & Machine Learning",
+    featured: true,
+    highlight: "Top AI Program by Google",
+    progress: "All 8 of 8 Courses Completed (100% Certified)",
+    credentialId: "D9ARSI9NJK5Z",
+    credentialUrl: "https://www.coursera.org/account/accomplishments/specialization/D9ARSI9NJK5Z",
+    imageUrl: "/assets/certificates/google-ai-specialization-cert.png",
+    description: "Official 8-course comprehensive professional credential by Google certifying deep fluency in Generative AI, LLMs, prompt architecture, AI for mobile app building, data analysis, and production deployment.",
+    skills: [
+      "Generative AI",
+      "LLM Prompt Engineering",
+      "AI for App Building",
+      "AI for Data Analysis",
+      "AI Workflow Automation",
+      "Cloud Integration"
+    ]
+  },
+  {
+    id: "google-flutter-dart",
+    title: "Google Flutter & Dart Certification",
+    issuer: "TheDigitalAdda",
+    organization: "TheDigitalAdda",
+    platform: "LinkedIn Verified",
+    issueDate: "May 2024",
+    badge: "ID: DA/GFD/23/12778",
+    category: "Mobile & Flutter",
+    featured: true,
+    highlight: "Core Flutter & Dart Architecture",
+    credentialUrl: "https://www.linkedin.com/in/vaibhavbadhe-flutter/details/certifications/",
+    imageUrl: "/assets/certificates/google-flutter-dart-cert.jpg",
+    description: "Successfully completed the Google Flutter & Dart Certification Program offered by The Digital Adda covering Flutter & Dart fundamentals.",
+    skills: ["Flutter", "Dart", "State Management", "Mobile Architecture"]
+  },
+  {
+    id: "ai-driven-flutter",
+    title: "AI-Driven Flutter Mobile App Development",
+    issuer: "WOW Light Signal AI Academy",
+    organization: "WOW Light Signal AI",
+    platform: "LinkedIn Verified",
+    issueDate: "August 2026",
+    badge: "Faculty Development Program",
+    category: "AI & Mobile",
+    featured: true,
+    highlight: "AI Agent Workflows & Mobile Integration",
+    credentialUrl: "https://www.linkedin.com/in/vaibhavbadhe-flutter/details/certifications/",
+    imageUrl: "/assets/certificates/ai-driven-flutter-cert.jpg",
+    description: "5-Day Online Faculty Development Program on AI-Driven Flutter Mobile App Development organized by WOW Light Signal AI Academy.",
+    skills: ["AI-Driven Flutter", "LLM Integration", "Smart Mobile UI"]
+  },
+  {
+    id: "react-js-cert",
+    title: "React JS Certification",
+    issuer: "TheDigitalAdda",
+    organization: "TheDigitalAdda",
+    platform: "LinkedIn Verified",
+    issueDate: "November 2025",
+    badge: "ID: DA/RJS/23/11758",
+    category: "Web & Frontend",
+    featured: true,
+    highlight: "Modern Web & Frontend Engineering",
+    credentialUrl: "https://www.linkedin.com/in/vaibhavbadhe-flutter/details/certifications/",
+    imageUrl: "/assets/certificates/react-js-cert.jpg",
+    description: "Successfully completed the React JS Certification Program from The Digital Adda.",
+    skills: ["React.js", "JavaScript", "Frontend Architecture"]
+  }
+];
+
