@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Award, CheckCircle2, ExternalLink, Sparkles, ShieldCheck, Eye, X, BrainCircuit, GraduationCap, Clock, Search, ArrowLeft, Smartphone, Code2 } from 'lucide-react';
-import { googleAICourses, linkedinCertificates, googleAISpecialization } from '../data/portfolioData';
+import { googleAICourses, linkedinCertificates, googleAISpecialization, claudePlatformCert } from '../data/portfolioData';
 
 export default function CertificatesModal({ onClose }) {
   const [activeTab, setActiveTab] = useState('all');
@@ -29,8 +29,9 @@ export default function CertificatesModal({ onClose }) {
   }, []);
 
   const categories = [
-    { id: 'all', label: 'All Verified Credentials (12)' },
+    { id: 'all', label: 'All Verified Credentials (13)' },
     { id: 'google-ai', label: 'Google AI Specialization & Courses (9)' },
+    { id: 'claude-ai', label: 'Claude Academy / Anthropic (1)' },
     { id: 'linkedin', label: 'LinkedIn Verified Certificates (3)' }
   ];
 
@@ -50,6 +51,25 @@ export default function CertificatesModal({ onClose }) {
     isGoogle: true,
     isSpecialization: true,
     recordId: googleAISpecialization.credentialId
+  };
+
+  // Official Claude Academy item
+  const claudeItem = {
+    id: claudePlatformCert.id,
+    title: claudePlatformCert.title,
+    issuer: claudePlatformCert.issuer,
+    platform: claudePlatformCert.platform,
+    badge: 'Anthropic Certified',
+    category: 'claude-ai',
+    status: 'Completed',
+    verifyUrl: claudePlatformCert.verifyUrl,
+    imageUrl: claudePlatformCert.imageUrl,
+    description: claudePlatformCert.description,
+    skills: claudePlatformCert.skills,
+    isGoogle: false,
+    isClaude: true,
+    isSpecialization: false,
+    recordId: claudePlatformCert.credentialId
   };
 
   // Map Google Courses
@@ -88,7 +108,7 @@ export default function CertificatesModal({ onClose }) {
     recordId: c.credentialId
   }));
 
-  const allItems = [specializationItem, ...googleItems, ...linkedinItems];
+  const allItems = [specializationItem, claudeItem, ...googleItems, ...linkedinItems];
 
   const filteredItems = allItems.filter(item => {
     const matchesCategory = activeTab === 'all' || item.category === activeTab;
@@ -123,7 +143,7 @@ export default function CertificatesModal({ onClose }) {
               </span>
             </div>
             <div className="text-[11px] text-slate-500 font-medium hidden md:block">
-              Verified records issued by Google Career Certificates, TheDigitalAdda & WOW Light Signal AI Academy
+              Verified records issued by Google Career Certificates, Anthropic Claude Academy, TheDigitalAdda & WOW Light Signal AI Academy
             </div>
           </div>
         </div>
@@ -318,7 +338,7 @@ export default function CertificatesModal({ onClose }) {
                           rel="noopener noreferrer"
                           className="ml-auto inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-[#ff5a00] text-white text-xs font-extrabold shadow-sm transition-all hover:scale-105"
                         >
-                          <span>{item.isGoogle ? 'Verify on Coursera' : 'Verify on LinkedIn'}</span>
+                          <span>{item.isGoogle ? 'Verify on Coursera' : item.isClaude ? 'Verify on Claude' : 'Verify on LinkedIn'}</span>
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
                       </div>
@@ -347,10 +367,10 @@ export default function CertificatesModal({ onClose }) {
 
       {/* High-Resolution Certificate Lightbox Modal */}
       {selectedPreview && (
-        <div className="fixed inset-0 z-60 flex items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-md animate-fadeIn">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 md:p-8 bg-slate-950/90 backdrop-blur-md animate-fadeIn">
           <div className="absolute inset-0" onClick={() => setSelectedPreview(null)} />
 
-          <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden z-10 border border-slate-200 flex flex-col max-h-[92vh]">
+          <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden z-10 border border-slate-200 flex flex-col max-h-[88vh] my-auto">
             
             {/* Modal Header */}
             <div className="flex items-center justify-between p-4 sm:p-5 border-b border-slate-200 bg-slate-50">
@@ -359,7 +379,7 @@ export default function CertificatesModal({ onClose }) {
                   <Award className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base sm:text-lg font-black text-slate-900 leading-tight">
+                  <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug break-words">
                     {selectedPreview.title}
                   </h3>
                   <p className="text-xs text-slate-500 font-medium">
@@ -384,7 +404,7 @@ export default function CertificatesModal({ onClose }) {
                   <img
                     src={selectedPreview.imageUrl}
                     alt={selectedPreview.title}
-                    className="w-full max-h-[60vh] object-contain"
+                    className="w-full max-h-[58vh] object-contain"
                   />
                 </div>
               ) : (
@@ -411,7 +431,7 @@ export default function CertificatesModal({ onClose }) {
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#ff5a00] hover:bg-[#ea5000] text-white text-xs font-extrabold shadow-md transition-all hover:scale-105 flex items-center justify-center gap-1.5"
                 >
-                  <span>{selectedPreview.isGoogle ? 'Verify on Coursera' : 'Verify on LinkedIn'}</span>
+                  <span>{selectedPreview.isGoogle ? 'Verify on Coursera' : selectedPreview.isClaude ? 'Verify on Claude Academy' : 'Verify on LinkedIn'}</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
 

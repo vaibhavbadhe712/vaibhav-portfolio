@@ -105,7 +105,7 @@ export default function CertificationsSection({ onOpenAllCertificates }) {
                       onClick={onOpenAllCertificates}
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#ff5a00] hover:bg-[#ea5000] text-white text-xs font-black shadow-md shadow-orange-500/20 transition-all duration-200 hover:scale-105"
                     >
-                      <span>View All 8 Certificates</span>
+                      <span>View All 13 Credentials</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -177,7 +177,7 @@ export default function CertificationsSection({ onOpenAllCertificates }) {
                 Dedicated Credentials & Certificates Hub
               </h3>
               <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
-                Explore all 12 verified accomplishment records with high-resolution certificate previews, Coursera verification links, and skill breakdowns on a dedicated interactive page.
+                Explore all 13 verified accomplishment records with high-resolution certificate previews, Coursera & Claude Academy verification links, and skill breakdowns on a dedicated interactive page.
               </p>
             </div>
           </div>

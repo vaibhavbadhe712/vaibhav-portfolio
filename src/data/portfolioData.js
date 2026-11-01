@@ -850,6 +850,34 @@ export const openSource = {
   ]
 };
 
+export const claudePlatformCert = {
+  id: "claude-platform-101",
+  title: "Claude Platform 101",
+  issuer: "Claude Academy (Anthropic)",
+  organization: "Anthropic",
+  platform: "Anthropic Verified Credential",
+  issueDate: "October 2026",
+  badge: "Anthropic Certified",
+  category: "claude-ai",
+  status: "Completed",
+  featured: true,
+  highlight: "Official Anthropic Claude Developer Credential",
+  credentialId: "aae29a307cbf0e8b19d0f621ac1b00b9",
+  verifyUrl: "https://academy.claude.com/verify/aae29a307cbf0e8b19d0f621ac1b00b9",
+  credentialUrl: "https://academy.claude.com/verify/aae29a307cbf0e8b19d0f621ac1b00b9",
+  imageUrl: "/assets/certificates/claude-platform-cert.png",
+  svgUrl: "/assets/certificates/claude-platform-cert.svg",
+  description: "Official completion credential issued by Anthropic's Claude Academy certifying deep practical fluency in the Claude developer platform, API architecture, Model Context Protocol (MCP), tool use (function calling), and agentic workflows.",
+  skills: [
+    "Claude API",
+    "Model Context Protocol (MCP)",
+    "Tool Use & Function Calling",
+    "Agentic Workflows",
+    "Prompt Architecture",
+    "Claude 3.5 Sonnet"
+  ]
+};
+
 export const googleAISpecialization = {
   id: "google-ai-specialization",
   title: "Google AI Professional Certificate",
@@ -1028,6 +1056,30 @@ export const certifications = [
       "AI for Data Analysis",
       "AI Workflow Automation",
       "Cloud Integration"
+    ]
+  },
+  {
+    id: "claude-platform-101",
+    title: "Claude Platform 101",
+    issuer: "Claude Academy (Anthropic)",
+    organization: "Anthropic",
+    platform: "Anthropic Verified",
+    issueDate: "October 2026",
+    badge: "Anthropic Certified",
+    category: "AI & LLM Architecture",
+    featured: true,
+    highlight: "Claude Developer Platform & Agentic Workflows",
+    credentialId: "aae29a307cbf0e8b19d0f621ac1b00b9",
+    credentialUrl: "https://academy.claude.com/verify/aae29a307cbf0e8b19d0f621ac1b00b9",
+    imageUrl: "/assets/certificates/claude-platform-cert.png",
+    description: "Official completion credential issued by Anthropic's Claude Academy certifying deep practical fluency in the Claude developer platform, API architecture, Model Context Protocol (MCP), tool use, and agentic workflows.",
+    skills: [
+      "Claude API",
+      "Model Context Protocol (MCP)",
+      "Tool Use & Function Calling",
+      "Agentic Workflows",
+      "Prompt Architecture",
+      "Claude 3.5 Sonnet"
     ]
   },
   {

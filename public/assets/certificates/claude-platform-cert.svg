@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" width="1600" height="1100">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141110"/>
+      <stop offset="50%" stop-color="#1c1715"/>
+      <stop offset="100%" stop-color="#0f0d0c"/>
+    </linearGradient>
+    
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d0b5"/>
+      <stop offset="40%" stop-color="#d97757"/>
+      <stop offset="80%" stop-color="#ebc9b7"/>
+      <stop offset="100%" stop-color="#b35436"/>
+    </linearGradient>
+
+    <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97757"/>
+      <stop offset="100%" stop-color="#f29979"/>
+    </linearGradient>
+
+    <radialGradient id="glowGrad" cx="50%" cy="25%" r="60%">
+      <stop offset="0%" stop-color="#d97757" stop-opacity="0.22"/>
+      <stop offset="60%" stop-color="#d97757" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(235, 201, 183, 0.03)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="1100" fill="url(#bgGrad)"/>
+  <rect width="1600" height="1100" fill="url(#grid)"/>
+  <rect width="1600" height="1100" fill="url(#glowGrad)"/>
+
+  <!-- Outer Border -->
+  <rect x="40" y="40" width="1520" height="1020" rx="24" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-opacity="0.45"/>
+  <rect x="52" y="52" width="1496" height="996" rx="18" fill="none" stroke="rgba(217, 119, 87, 0.18)" stroke-width="1"/>
+
+  <!-- Corner Ornaments -->
+  <path d="M 70 120 L 70 70 L 120 70" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <path d="M 1530 120 L 1530 70 L 1480 70" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <path d="M 70 980 L 70 1030 L 120 1030" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <path d="M 1530 980 L 1530 1030 L 1480 1030" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+
+  <!-- Header: Anthropic Brand (Left) & Verified Badge (Right) -->
+  <g transform="translate(140, 140)">
+    <!-- Claude Asterisk Logo -->
+    <g transform="translate(0, -28) scale(0.9)">
+      <circle cx="32" cy="32" r="28" fill="#2b1a15" stroke="url(#goldGrad)" stroke-width="1.5"/>
+      <g transform="translate(32, 32)" fill="#d97757">
+        <rect x="-3" y="-18" width="6" height="36" rx="3"/>
+        <rect x="-3" y="-18" width="6" height="36" rx="3" transform="rotate(45)"/>
+        <rect x="-3" y="-18" width="6" height="36" rx="3" transform="rotate(90)"/>
+        <rect x="-3" y="-18" width="6" height="36" rx="3" transform="rotate(135)"/>
+      </g>
+    </g>
+
+    <text x="80" y="-4" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800" fill="#ffffff" letter-spacing="6">ANTHROPIC</text>
+    <text x="80" y="22" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#d97757" letter-spacing="4">CLAUDE ACADEMY</text>
+  </g>
+
+  <!-- Verified Badge Pill (Top Right) -->
+  <g transform="translate(1260, 120)">
+    <rect x="0" y="0" width="200" height="40" rx="20" fill="#2b1a15" stroke="rgba(217,119,87,0.4)" stroke-width="1"/>
+    <circle cx="28" cy="20" r="5" fill="#34d399"/>
+    <text x="46" y="25" font-family="ui-monospace, monospace" font-size="12" font-weight="700" fill="#a7f3d0" letter-spacing="1">100% VERIFIED</text>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="140" y1="210" x2="1460" y2="210" stroke="url(#goldGrad)" stroke-width="1" stroke-opacity="0.2"/>
+
+  <!-- Main Title & Badge Pictogram -->
+  <g transform="translate(800, 275)" text-anchor="middle">
+    <!-- Badge Pictogram: ObjectCodeGear -->
+    <g transform="translate(0, 10)">
+      <circle cx="0" cy="0" r="55" fill="#251714" stroke="url(#goldGrad)" stroke-width="2"/>
+      <circle cx="0" cy="0" r="46" fill="none" stroke="rgba(217, 119, 87, 0.25)" stroke-width="1" stroke-dasharray="4 3"/>
+      
+      <!-- Scaled CodeGear Paths -->
+      <g transform="translate(-40, -40) scale(0.16)" fill="#ebc9b7">
+        <path d="M403.97 273.2c2.06-1.7 29.43-1.29 33.45-4.33s.82-38.24.82-43.6-2.83-32.11-6.85-34.79-36.18 2.68-37.52 2.68-8.04-16.08-9.38-20.1-14.07-22.11-15.41-23.45 18.09-24.79 18.09-27.47-12.75-15.3-26.15-26.02c-12.6-10.08-30.01-20.55-34.03-20.55s-18.66 25.49-21.34 28.17-35.05-7.06-37.73-7.06-4.51-35.51-7.37-38.19-17.9-2.2-36.54.29c-20.1 2.68-34.48 9.09-35.82 13.11s6.76 29.48 6.7 33.5-29.66 20.44-33.68 21.78-25.95-22.45-31.31-22.45-42.21 36.85-52.93 60.97l1.24-1.69c-.8 1.54-1.24 2.6-1.24 3.03 0 4.02 31.26 23.24 32.6 27.26s-11.84 39.07-11.84 41.75-34.17 2.01-35.51 6.03-.2 24.42 1.14 33.8 3.55 35.21 7.57 37.89 38.86-2.68 41.54 0 14.74 28.14 14.74 30.82-22.78 28.14-21.44 30.82 11.01 11.54 18.09 19.24c15.41 16.75 36.18 29.66 38.86 29.66s23.45-24.79 26.13-26.13 13.62 2.72 17.42 4.02c9.92 3.39 16.08 6.7 21.44 8.04s10.72 30.82 13.27 33.5 26.39-1 34.43-2.34 32.7-4.36 35.26-7.35c2.57-2.98-2.57-34.53.11-38.55s24.12-13.4 25.46-13.4 25.46 21.44 28.14 21.44 18.8-20.23 24.16-25.59 26.76-29.34 24.08-33.36-26.8-21.44-28.14-24.12 5.36-16.08 8.04-21.44 9.38-24.12 11.44-25.82zM251.2 350.37c-55.63 0-100.73-45.1-100.73-100.73s45.1-100.73 100.73-100.73 100.73 45.1 100.73 100.73-45.1 100.73-100.73 100.73" fill="#d97757"/>
+      </g>
+    </g>
+
+    <text x="0" y="110" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="#d97757" letter-spacing="6">COURSE COMPLETION CREDENTIAL</text>
+    <text x="0" y="145" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="400" fill="#a89f9b" letter-spacing="2">THIS CERTIFICATE IS OFFICIALLY PRESENTED TO</text>
+  </g>
+
+  <!-- Recipient Name -->
+  <g transform="translate(800, 490)" text-anchor="middle">
+    <rect x="-380" y="-45" width="760" height="75" rx="12" fill="rgba(217, 119, 87, 0.05)" stroke="url(#goldGrad)" stroke-width="1.2" stroke-opacity="0.4"/>
+    <text x="0" y="8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="800" fill="#ffffff" letter-spacing="3">Vaibhav Badhe</text>
+  </g>
+
+  <!-- Course Title & Description -->
+  <g transform="translate(800, 580)" text-anchor="middle">
+    <text x="0" y="30" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="400" fill="#a89f9b" letter-spacing="1">FOR SUCCESSFULLY COMPLETING THE COMPREHENSIVE CURRICULUM FOR</text>
+    <text x="0" y="85" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="38" font-weight="800" fill="url(#terracottaGrad)" letter-spacing="1">Claude Platform 101</text>
+    
+    <text x="0" y="130" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="400" fill="#d1ccc7">
+      Demonstrating mastery in Claude API development, Model Context Protocol (MCP), tool use,
+    </text>
+    <text x="0" y="156" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="400" fill="#d1ccc7">
+      agentic workflows, system prompt optimization, and production LLM integration.
+    </text>
+  </g>
+
+  <!-- Competencies Badges -->
+  <g transform="translate(800, 800)" text-anchor="middle">
+    <g transform="translate(-380, 0)">
+      <rect x="0" y="0" width="160" height="32" rx="16" fill="#241915" stroke="rgba(217,119,87,0.3)" stroke-width="1"/>
+      <text x="80" y="21" font-family="ui-monospace, monospace" font-size="12" font-weight="500" fill="#ebc9b7">Claude API &amp; SDK</text>
+    </g>
+    <g transform="translate(-200, 0)">
+      <rect x="0" y="0" width="180" height="32" rx="16" fill="#241915" stroke="rgba(217,119,87,0.3)" stroke-width="1"/>
+      <text x="90" y="21" font-family="ui-monospace, monospace" font-size="12" font-weight="500" fill="#ebc9b7">Agentic Workflows</text>
+    </g>
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="170" height="32" rx="16" fill="#241915" stroke="rgba(217,119,87,0.3)" stroke-width="1"/>
+      <text x="85" y="21" font-family="ui-monospace, monospace" font-size="12" font-weight="500" fill="#ebc9b7">Tool Use &amp; Calling</text>
+    </g>
+    <g transform="translate(190, 0)">
+      <rect x="0" y="0" width="190" height="32" rx="16" fill="#241915" stroke="rgba(217,119,87,0.3)" stroke-width="1"/>
+      <text x="95" y="21" font-family="ui-monospace, monospace" font-size="12" font-weight="500" fill="#ebc9b7">Prompt Architecture</text>
+    </g>
+  </g>
+
+  <!-- Bottom Divider Line -->
+  <line x1="140" y1="885" x2="1460" y2="885" stroke="url(#goldGrad)" stroke-width="1" stroke-opacity="0.2"/>
+
+  <!-- Footer Verification Info -->
+  <g transform="translate(140, 930)">
+    <text x="0" y="18" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500" fill="#786f6b" letter-spacing="1">ISSUED ON</text>
+    <text x="0" y="42" font-family="ui-monospace, monospace" font-size="16" font-weight="700" fill="#ffffff">October 30, 2026</text>
+
+    <text x="250" y="18" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500" fill="#786f6b" letter-spacing="1">CREDENTIAL ID</text>
+    <text x="250" y="42" font-family="ui-monospace, monospace" font-size="16" font-weight="700" fill="#d97757">aae29a307cbf0e8b19d0f621ac1b00b9</text>
+  </g>
+
+  <!-- Right: Verification URL & Official Signature/Seal -->
+  <g transform="translate(1460, 930)" text-anchor="end">
+    <text x="0" y="18" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500" fill="#786f6b" letter-spacing="1">OFFICIAL VERIFICATION PORTAL</text>
+    <text x="0" y="42" font-family="ui-monospace, monospace" font-size="14" font-weight="600" fill="#ebc9b7">https://academy.claude.com/verify</text>
+    <text x="0" y="64" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="400" fill="#786f6b">Anthropic PBC • Verified Digital Credential</text>
+  </g>
+</svg>
