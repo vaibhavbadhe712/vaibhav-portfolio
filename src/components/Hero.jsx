@@ -29,6 +29,7 @@ import {
   Phone
 } from 'lucide-react';
 import { LinkedinIcon, GithubIcon, FlutterIcon, GooglePlayIcon, AppStoreIcon } from './Icons';
+import TiltCard from './TiltCard';
 import { personalInfo } from '../data/portfolioData';
 
 const photoOptions = [
