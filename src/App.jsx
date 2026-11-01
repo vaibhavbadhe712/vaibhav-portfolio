@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import RealtimeBackground from './components/RealtimeBackground';
+import RealtimeScrollHUD from './components/RealtimeScrollHUD';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import StatsCounter from './components/StatsCounter';
@@ -19,7 +21,12 @@ export default function App() {
   const [isCertModalOpen, setIsCertModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col selection:bg-orange-500/20 selection:text-orange-600">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col selection:bg-orange-500/20 selection:text-orange-600 relative overflow-x-hidden">
+      {/* Real-time Interactive Dynamic Particles & Connection Grid */}
+      <RealtimeBackground />
+
+      {/* Real-time Top Scroll Progress Bar, Ambient Cursor Torch & Flutter Engine Telemetry HUD */}
+      <RealtimeScrollHUD />
       {/* Top Navbar */}
       <Navbar 
         onOpenResume={() => setIsResumeOpen(true)} 

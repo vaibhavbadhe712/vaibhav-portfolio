@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Package, Copy, Check, ExternalLink, BellRing, Sparkles, CheckCircle2, AlertCircle, Info } from 'lucide-react';
 import { openSource } from '../data/portfolioData';
 
@@ -136,22 +137,38 @@ export default function OpenSourceSection() {
 
                 {/* Simulated Floating Toast Popup */}
                 <div className="min-h-[75px] flex items-center justify-center pt-2">
-                  {demoToast ? (
-                    <div className="w-full p-3.5 rounded-xl bg-white border-2 border-slate-300 shadow-xl flex items-center gap-3 animate-bounce">
-                      {demoToast.type === 'success' && <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />}
-                      {demoToast.type === 'error' && <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />}
-                      {demoToast.type === 'info' && <Info className="w-5 h-5 text-blue-600 shrink-0" />}
-                      {demoToast.type === 'payment' && <Sparkles className="w-5 h-5 text-amber-600 shrink-0" />}
-                      <div className="text-left">
-                        <div className="text-xs font-extrabold text-slate-900">{demoToast.title}</div>
-                        <div className="text-[11px] text-slate-600 font-medium">{demoToast.message}</div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="text-xs font-mono text-slate-400 text-center italic">
-                      Tap any button above to trigger live toast
-                    </div>
-                  )}
+                  <AnimatePresence mode="wait">
+                    {demoToast ? (
+                      <motion.div 
+                        key={demoToast.title}
+                        initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 450, damping: 25 }}
+                        className="w-full p-3.5 rounded-2xl bg-white border-2 border-slate-300 shadow-2xl shadow-slate-300/60 flex items-center gap-3"
+                      >
+                        {demoToast.type === 'success' && <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />}
+                        {demoToast.type === 'error' && <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />}
+                        {demoToast.type === 'info' && <Info className="w-5 h-5 text-blue-600 shrink-0" />}
+                        {demoToast.type === 'payment' && <Sparkles className="w-5 h-5 text-amber-600 shrink-0" />}
+                        <div className="text-left flex-1 min-w-0">
+                          <div className="text-xs font-extrabold text-slate-900">{demoToast.title}</div>
+                          <div className="text-[11px] text-slate-600 font-medium truncate">{demoToast.message}</div>
+                        </div>
+                        <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 shrink-0">
+                          ACTIVE
+                        </span>
+                      </motion.div>
+                    ) : (
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="text-xs font-mono text-slate-400 text-center italic"
+                      >
+                        Tap any button above to trigger live toast
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
               </div>

@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { GooglePlayIcon, AppStoreIcon } from './Icons';
 import { playStoreAssets } from '../data/portfolioData';
+import TiltCard from './TiltCard';
 
 export default function ProjectCard({ project, onSelect }) {
   const asset = playStoreAssets[project.id] || {
@@ -25,7 +26,8 @@ export default function ProjectCard({ project, onSelect }) {
   const graphicUrl = project.graphic || asset.graphic;
 
   return (
-    <motion.div
+    <TiltCard maxTilt={5} className="h-full">
+      <motion.div
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -218,5 +220,6 @@ export default function ProjectCard({ project, onSelect }) {
 
       </div>
     </motion.div>
+    </TiltCard>
   );
 }

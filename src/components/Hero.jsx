@@ -143,6 +143,25 @@ export default function Hero({ onOpenResume }) {
               Hi, I'm <strong className="font-extrabold text-slate-900">{personalInfo.name}</strong> — Senior Flutter Developer at <strong className="font-bold text-slate-900">INFYNOD TECH PRIVATE LIMITED</strong>. I engineer high-performance, crash-free mobile applications for Android & iOS — including <span className="font-bold text-orange-600">Welvors</span> (dating & social networking), US enterprise workforce platforms, and full-stack Node.js/Fastify microservices.
             </motion.p>
 
+            {/* Real-time Flutter Engine Telemetry Pills */}
+            <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[11px]">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 shadow-2xs">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="font-bold">Flutter 3.24 Engine</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                <span>Impeller VSync 60-120 FPS</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-orange-800 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff5a00]"></span>
+                <span>Crash-Free 99.8%</span>
+              </div>
+            </div>
+
             {/* Cars24-style 4 Trust Checkpoints */}
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
@@ -262,11 +281,12 @@ export default function Hero({ onOpenResume }) {
           <div className="lg:col-span-5 flex justify-center relative">
             
             {/* The Main Elevated Showcase Frame */}
+            <TiltCard maxTilt={6} className="w-full max-w-[400px] z-10">
             <motion.div 
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="relative w-full max-w-[400px] rounded-[32px] bg-white p-3.5 sm:p-4 border border-slate-200/90 shadow-2xl shadow-slate-300/80"
+              className="relative w-full rounded-[32px] bg-white p-3.5 sm:p-4 border border-slate-200/90 shadow-2xl shadow-slate-300/80"
             >
               
               {/* Photo Display Viewport with Rounded Corners */}
@@ -336,14 +356,18 @@ export default function Hero({ onOpenResume }) {
                   );
                 })}
               </div>
-
             </motion.div>
+            </TiltCard>
 
-            {/* Floating Trust Badge 1: Best Employee 2025 (Top Right - Pushed to side) */}
+            {/* Floating Trust Badge 1: Best Employee 2025 (Top Right - Floating Physics) */}
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              animate={{ opacity: 1, x: 0, y: [0, -8, 0] }}
+              transition={{ 
+                opacity: { duration: 0.6, delay: 0.3 },
+                x: { duration: 0.6, delay: 0.3 },
+                y: { repeat: Infinity, duration: 4.5, ease: "easeInOut" }
+              }}
               whileHover={{ scale: 1.05 }}
               className="hidden sm:flex absolute -top-6 -right-6 sm:-right-10 lg:-right-16 bg-white border border-slate-200/90 rounded-2xl p-3 shadow-xl items-center gap-3 z-20 backdrop-blur-sm"
             >
@@ -359,11 +383,15 @@ export default function Hero({ onOpenResume }) {
               </div>
             </motion.div>
 
-            {/* Floating Trust Badge 2: Infynod Tech Role (Bottom Left - Kept down, pushed to the side) */}
+            {/* Floating Trust Badge 2: Infynod Tech Role (Bottom Left - Counter-Phase Floating Physics) */}
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              animate={{ opacity: 1, x: 0, y: [0, 8, 0] }}
+              transition={{ 
+                opacity: { duration: 0.6, delay: 0.4 },
+                x: { duration: 0.6, delay: 0.4 },
+                y: { repeat: Infinity, duration: 5.2, ease: "easeInOut" }
+              }}
               whileHover={{ scale: 1.05 }}
               className="hidden sm:flex absolute -bottom-5 -left-10 sm:-left-10 lg:-left-20 bg-white border border-slate-200/90 rounded-2xl p-2.5 sm:p-3 shadow-xl items-center gap-2.5 sm:gap-3 z-20 backdrop-blur-sm"
             >
